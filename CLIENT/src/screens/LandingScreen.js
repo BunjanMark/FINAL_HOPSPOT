@@ -44,7 +44,7 @@ const LandingScreen = () => {
           <Button
             mode="contained"
             onPress={() => {
-              navigator.navigate("HomeScreen");
+              navigator.navigate("LoginScreen");
             }}
             style={{
               backgroundColor: "black",
@@ -75,16 +75,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
-    paddingBottom: heightPercentageToDP("15%"), // Adjust the percentage as needed
+    paddingBottom: heightPercentageToDP("15%"),
   },
   logo: {
     position: "absolute",
-    top: heightPercentageToDP("-4%"), // Adjust the percentage as needed
-    left: widthPercentageToDP("3%"), // Adjust the percentage as needed
+    top: heightPercentageToDP("-4%"),
+    left: widthPercentageToDP("3%"),
   },
   buttonContainer: {
     flexDirection: "column",
-    gap: heightPercentageToDP("4%"), // Adjust the percentage as needed
+    gap: heightPercentageToDP("4%"),
   },
 });
 

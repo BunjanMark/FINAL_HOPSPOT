@@ -17,7 +17,7 @@ import {
   widthPercentageToDP,
   heightPercentageToDP,
 } from "react-native-responsive-screen";
-
+import { ngrok } from "../services/ngrok";
 const RegisterScreen = () => {
   const navigator = useNavigation();
   const [name, setName] = useState("");
@@ -52,8 +52,7 @@ const RegisterScreen = () => {
         return false;
       }
 
-      const url =
-        "https://611b-2001-4455-402-f300-2879-982b-b6d-9d92.ngrok-free.app/api/register";
+      const url = `${ngrok}/api/register`;
 
       const data = {
         name,

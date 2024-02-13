@@ -19,6 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Toast from "react-native-root-toast";
 import fetchServices from "../services/fetchServices";
+import { ngrok } from "../services/ngrok";
 
 const AccountRecoveryScreen = () => {
   const navigator = useNavigation();
@@ -34,7 +35,7 @@ const AccountRecoveryScreen = () => {
   const toggleSecureEntry = () => {
     setHideEntry(!HideEntry);
   };
-  
+
   const handleSendCode = async () => {
     try {
       // Perform account recovery logic here
@@ -44,9 +45,8 @@ const AccountRecoveryScreen = () => {
         setIsError(true);
         return false;
       }
-      
-      const url =
-        "https://c292-2001-4455-62c-c800-478-e4fb-7367-cf00.ngrok-free.app/api/password/reset";
+
+      const url = `${ngrok}/api/password/reset`;
 
       const data = {
         email,
@@ -103,7 +103,7 @@ const AccountRecoveryScreen = () => {
             >
               ACCOUNT RECOVERY
             </Text>
-             <TextInput
+            <TextInput
               style={{ ...styles.inputStyle, borderRadius: 10 }}
               mode="outlined"
               label="Email"

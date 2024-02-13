@@ -22,6 +22,7 @@ import {
 import { useState } from "react";
 import Toast from "react-native-root-toast";
 import fetchServices from "../services/fetchServices";
+import { ngrok } from "../services/ngrok";
 
 const LoginScreen = () => {
   const navigator = useNavigation();
@@ -46,8 +47,7 @@ const LoginScreen = () => {
         return false;
       }
 
-      const url =
-        "https://611b-2001-4455-402-f300-2879-982b-b6d-9d92.ngrok-free.app/api/login";
+      const url = `${ngrok}/api/login`;
 
       const data = {
         email,
@@ -144,7 +144,7 @@ const LoginScreen = () => {
                     navigator.navigate("AccountRecoveryScreen");
                   }}
                 >
-                  Forgot Password 
+                  Forgot Password
                 </Button>
               </View>
             </SafeAreaView>

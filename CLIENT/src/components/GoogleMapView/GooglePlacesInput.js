@@ -85,7 +85,7 @@ const GooglePlacesInput = () => {
       setDuration(args.duration);
       setDetails(active, args.distance.toFixed(2), Math.ceil(args.duration));
     }
-  };  
+  };
 
   const traceRouteOnReadyPuv = (args) => {
     if (args) {
@@ -100,14 +100,12 @@ const GooglePlacesInput = () => {
   const handleButtonPressRoute = () => {
     setIsSearchContainerVisible(!isSearchContainerVisible);
     setIsSearchContainerRouteVisible(!isSearchContainerVisible);
-    // Additional logic or state updates can be added here
   };
 
   // For PUV
   const handleButtonPressPuv = () => {
     setIsSearchContainerVisible(!isSearchContainerVisible);
     setIsSearchContainerPuvVisible(!isSearchContainerPuvVisible);
-    // Additional logic or state updates can be added here
   };
 
   const toggleActive = (value) => {
@@ -163,7 +161,7 @@ const GooglePlacesInput = () => {
           location: current_position,
           address: formattedAddress,
           origin: originPassenger,
-          destination: originDriver, 
+          destination: originDriver,
           distance: distance,
           duration: duration,
         });
@@ -214,7 +212,7 @@ const GooglePlacesInput = () => {
         toggleActive(false);
         console.log("Active state:", active);
         console.log("Interval stopped at:", new Date());
-      }, 60000);
+      }, 120000);
     } else {
       // Clear the interval immediately when the active is already true
       clearInterval(interval);
@@ -234,27 +232,25 @@ const GooglePlacesInput = () => {
   const onPlaceSelected = (details, flag) => {
     const set = flag === "origin" ? setOrigin : setDestination;
 
-    // Check if details object exists and has the expected structure
     if (details && details.geometry && details.geometry.location) {
       const { lat, lng } = details.geometry.location;
       const position = { latitude: lat, longitude: lng };
       set(position);
       moveTo(position);
-  
+
       // Extract formatted address from details
       const locationName = details.formatted_address;
-  
+
       console.log("Selected Location:", locationName);
-      if (flag === 'origin') {
+      if (flag === "origin") {
         setSelectedOrigin({ locationName, position });
         setOrigin(position);
-      } else if (flag === 'destination') {
+      } else if (flag === "destination") {
         setSelectedDestination({ locationName, position });
         setDestination(position);
       }
-
     } else {
-      console.warn('Invalid details object:', details);
+      console.warn("Invalid details object:", details);
     }
   };
 
@@ -280,35 +276,31 @@ const GooglePlacesInput = () => {
     set(details);
   };
 
-const onPlaceSelectedPuvDriver = (details, flag) => {
-  const set = flag === "originDriver" ? setOriginDriver : setOriginPassenger;
+  const onPlaceSelectedPuvDriver = (details, flag) => {
+    const set = flag === "originDriver" ? setOriginDriver : setOriginPassenger;
 
-  // Check if details object exists and has the expected structure
-  if (details && details.geometry && details.geometry.location) {
-    const { lat, lng } = details.geometry.location;
+    // Check if details object exists and has the expected structure
+    if (details && details.geometry && details.geometry.location) {
+      const { lat, lng } = details.geometry.location;
 
-    const position = {
-      latitude: lat,
-      longitude: lng,
-    };
+      const position = {
+        latitude: lat,
+        longitude: lng,
+      };
 
-    set(position);
-    moveTo(position);
+      set(position);
+      moveTo(position);
 
-    // Extract formatted address from details
-    const locationName = details.formatted_address;
+      // Extract formatted address from details
+      const locationName = details.formatted_address;
 
-    console.log("Selected Location:", locationName);
+      console.log("Selected Location:", locationName);
 
-    // Set the selected location name to state or perform further actions
-    // For example:
-    // setDetails({ locationName, latitude: lat, longitude: lng });
-
-    // Rest of your code...
-  } else {
-    console.warn("Invalid details object:", details);
-  }
-};
+      // Set the selected location name to state or perform further actions
+    } else {
+      console.warn("Invalid details object:", details);
+    }
+  };
 
   useEffect(() => {
     const handleLocationUpdate = (data) => {
